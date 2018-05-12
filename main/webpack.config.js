@@ -88,11 +88,11 @@ module.exports = {
 	},
 	plugins: [
 		new HtmlWebpackPlugin({
-			title: "ZMS",
+			title: "ZMS Store",
 			template: "./index.html",
 			seo: {
 				keywords: "press,zms,zeronet,cms",
-				description: "ZeroNet Management System"
+				description: "Zero Management System"
 			}
 		}),
 		new CopyWebpackPlugin([

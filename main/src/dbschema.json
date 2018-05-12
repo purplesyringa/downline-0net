@@ -1,6 +1,6 @@
 {
-	"db_name": "0press",
-	"db_file": "data/0press.db",
+	"db_name": "zmsstore",
+	"db_file": "data/zmsstore.db",
 	"version": 2,
 	"maps": {
 		"data/users/.+/content.json": {

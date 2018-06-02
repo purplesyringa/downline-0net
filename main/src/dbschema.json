@@ -1,6 +1,6 @@
 {
-	"db_name": "zmsstore",
-	"db_file": "data/zmsstore.db",
+	"db_name": "downline",
+	"db_file": "data/downline.db",
 	"version": 2,
 	"maps": {
 		"data/users/.+/content.json": {

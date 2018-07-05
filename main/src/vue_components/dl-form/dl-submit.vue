@@ -1,7 +1,7 @@
 <template>
-	<div class="dl-submit">
+	<button class="dl-submit">
 		<icon name="arrow-right" class="icon" />
-	</div>
+	</button>
 </template>
 
 <style lang="sass">
@@ -17,6 +17,8 @@
 		height: 50px
 		margin-left: -50px
 
+		background: none
+		border: none
 		border-bottom: 2px solid $main-color
 		border-right: 2px solid $main-color
 
@@ -26,6 +28,11 @@
 
 		cursor: pointer
 		color: $main-color
+		outline: none
+
+	.dl-submit:focus
+		background-color: $main-color
+		color: #FFF
 
 	.icon
 		display: inline-block

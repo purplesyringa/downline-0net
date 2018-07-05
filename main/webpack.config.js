@@ -4,6 +4,33 @@ const webpack = require("webpack");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
 
+const scss = [
+	"style-loader",
+	"css-loader",
+	"sass-loader",
+	{
+		loader: "sass-resources-loader",
+		options: {
+			resources: [
+				path.resolve(__dirname, "./src/sass/include.sass")
+			]
+		}
+	}
+];
+const sass = [
+	"style-loader",
+	"css-loader",
+	"sass-loader?indentedSyntax",
+	{
+		loader: "sass-resources-loader",
+		options: {
+			resources: [
+				path.resolve(__dirname, "./src/sass/include.sass")
+			]
+		}
+	}
+];
+
 module.exports = {
 	context: path.resolve(__dirname, "./src"),
 	entry: {
@@ -21,18 +48,22 @@ module.exports = {
 				loader: "vue-loader",
 				options: {
 					loaders: {
-						scss: "vue-style-loader!css-loader!sass-loader",
-						sass: "vue-style-loader!css-loader!sass-loader?indentedSyntax",
+						scss,
+						sass
 					}
 				}
 			},
 			{
 				test: /\.css$/,
-				loader: "style-loader!css-loader"
+				loader: "css-loader"
 			},
 			{
-				test: /\.s[ac]ss$/,
-				loader: "style-loader!css-loader!sass-loader?indentedSyntax"
+				test: /\.scss$/,
+				loader: scss
+			},
+			{
+				test: /\.sass$/,
+				loader: sass
 			},
 			{
 				test: /\.js$/,

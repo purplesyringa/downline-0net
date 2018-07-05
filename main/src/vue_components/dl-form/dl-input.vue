@@ -8,6 +8,7 @@
 		width: 256px
 		height: 50px
 		padding: 8px
+		margin-bottom: 16px
 
 		vertical-align: top
 

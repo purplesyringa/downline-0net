@@ -1,9 +1,12 @@
 <template>
 	<div class="root">
+		<header>Downline</header>
+
 		<div class="user-icon-container">
 			<icon name="user" class="user-icon" />
 		</div>
 
+		<dl-input name="Login" /><br>
 		<dl-input name="Password" /><dl-submit />
 	</div>
 </template>
@@ -15,6 +18,15 @@
 		top: 50%
 		transform: translateX(-50%) translateY(-50%)
 
+
+
+	header
+		display: block
+		margin-bottom: 32px
+
+		color: $main-color
+		font-size: 64px
+		text-align: center
 
 
 	.user-icon-container

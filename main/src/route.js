@@ -1,4 +1,4 @@
-import ZeroFrame from "./libs/ZeroFrame.js";
+import ZeroFrame from "zero-dev-lib/ZeroFrame";
 const zf = new ZeroFrame();
 
 import ZeroPage from "zero-dev-lib/ZeroPage";

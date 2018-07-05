@@ -1,7 +1,5 @@
 <template>
-	<div class="dl-input">
-		<input :placeholder="name">
-	</div>
+	<input class="dl-input" :placeholder="name">
 </template>
 
 <style lang="sass" scoped>
@@ -9,20 +7,9 @@
 		display: inline-block
 		width: 256px
 		height: 50px
-
-		position: relative
-		vertical-align: top
-
-
-	input
-		display: block
-		width: 100%
-		height: 50px
 		padding: 8px
 
-		position: absolute
-		left: 0
-		top: 0
+		vertical-align: top
 
 		font-size: 32px
 		background: none
@@ -32,7 +19,7 @@
 		color: #FFF
 		outline: none
 
-	input:focus
+	.dl-input:focus
 		background-color: $main-color
 </style>
 

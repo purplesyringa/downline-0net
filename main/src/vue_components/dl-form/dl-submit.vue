@@ -4,6 +4,11 @@
 	</div>
 </template>
 
+<style lang="sass">
+	.dl-input:focus + .dl-submit
+		color: #FFF
+</style>
+
 <style lang="sass" scoped>
 	.dl-submit
 		display: inline-block
@@ -20,12 +25,12 @@
 		vertical-align: top
 
 		cursor: pointer
+		color: $main-color
 
 	.icon
 		display: inline-block
 		width: 32px
 		height: 32px
-		color: $main-color
 </style>
 
 <script type="text/javascript">

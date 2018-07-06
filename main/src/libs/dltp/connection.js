@@ -56,10 +56,10 @@ export default class Connection {
 	}
 
 	log(...args) {
-		if(this.connectionId === null) {
-			console.log("[dltp]", "[connection]", ...args);
+		if(this.handler) {
+			console.log("[dltp]", `[connection ${this.handler.connectionId}]`, ...args);
 		} else {
-			console.log("[dltp]", `[connection ${this.connectionId}]`, ...args);
+			console.log("[dltp]", "[connection]", ...args);
 		}
 	}
 };

@@ -1,5 +1,6 @@
 import {zeroPage} from "../zero";
 import DLTPInsecureConnection from "./connection/insecure";
+import DLTPSecureV1Connection from "./connection/securev1";
 import {safeSend} from "./util";
 
 zeroPage.on("peerReceive", message => {
@@ -28,12 +29,19 @@ class DLTPServer {
 
 		if(message.message === "dltp:features") {
 			safeSend("dltp:featureList:" + [
+				"securev1",
 				"insecure"
 			].join(";"), message.ip, message.hash);
 			zeroPage.cmd("peerValid", [message.hash]);
 		} else if(message.message === "dltp:open:insecure") {
 			const id = this.lastId++;
 			this.connections[`${message.ip}:${id}`] = new DLTPInsecureConnection(message.hash, message.ip, id, this.handler);
+			zeroPage.cmd("peerValid", [message.hash]);
+		} else if(message.message.startsWith("dltp:open:securev1:")) {
+			const clientPublicKey = Buffer.from(message.message.replace("dltp:open:securev1:", ""), "base64");
+
+			const id = this.lastId++;
+			this.connections[`${message.ip}:${id}`] = new DLTPSecureV1Connection(message.hash, message.ip, id, clientPublicKey, this.handler);
 			zeroPage.cmd("peerValid", [message.hash]);
 		} else if(message.message.startsWith("dltp:connection:")) {
 			const msg = message.message.replace("dltp:connection:", "");

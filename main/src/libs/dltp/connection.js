@@ -1,5 +1,6 @@
 import {zeroPage} from "../../zero";
 import DLTPInsecureHandler from "./handler/insecure";
+import DLTPSecureV1Handler from "./handler/securev1";
 
 export default class Connection {
 	constructor(bcAddress, ip) {
@@ -20,7 +21,8 @@ export default class Connection {
 
 		if(features.indexOf("securev1") > -1) {
 			this.log("Trying to connect via 'securev1'...");
-			throw new Error("Not implemented");
+			this.handler = new DLTPSecureV1Handler(this.bcAddress, this.ip);
+			await this.handler.open();
 		} else if(features.indexOf("insecure") > -1) {
 			this.log("Trying to connect via 'insecure'...");
 			this.handler = new DLTPInsecureHandler(this.bcAddress, this.ip);

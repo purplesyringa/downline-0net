@@ -34,7 +34,7 @@ class DLTPInsecureConnection {
 	}
 
 	log(...args) {
-		console.log("[dltp]", `[connection #${this.id}]`, ...args);
+		console.log("[dltp]", `[connection #${this.id}]`, "[insecure]", ...args);
 	}
 };
 

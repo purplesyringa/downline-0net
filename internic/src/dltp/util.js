@@ -1,4 +1,5 @@
 import {zeroPage} from "../zero";
+import eccrypto from "eccrypto";
 
 export async function safeSend(message, ip, to) {
 	const reply = await zeroPage.cmd("peerSend", {
@@ -12,12 +13,12 @@ export async function safeSend(message, ip, to) {
 
 
 export function encode(value) {
-	if(["number", "boolean", "undefined"].indexOf(typeof value) > -1 || value === null) {
+	if(value instanceof Buffer) {
+		return `buffer:${Buffer.from(value, "utf8").toString("base64")}`;
+	} else if(["number", "boolean", "undefined"].indexOf(typeof value) > -1 || value === null) {
 		return `${value === null ? "null" : typeof value}:${value}`;
-	} else if(typeof value === "object") {
-		return `object:${JSON.stringify(value)}`;
 	} else {
-		return `${typeof value}:${Buffer.from(value).toString("base64")}`;
+		return `object:${JSON.stringify(value)}`;
 	}
 }
 
@@ -40,4 +41,32 @@ export function decode(value) {
 	} else {
 		return Buffer.from(value, "base64");
 	}
+}
+
+
+export async function encrypt(value, publicKey) {
+	const encrypted = await eccrypto.encrypt(publicKey, Buffer.from(encode(value), "utf8"));
+
+	const ciphertext = encrypted.ciphertext.toString("base64");
+	const ephemPublicKey = encrypted.ephemPublicKey.toString("base64");
+	const iv = encrypted.iv.toString("base64");
+	const mac = encrypted.mac.toString("base64");
+
+	return `${ciphertext}:${ephemPublicKey}:${iv}:${mac}`;
+}
+
+export async function decrypt(value, privateKey) {
+	let [ciphertext, ephemPublicKey, iv, mac] = value.split(":");
+	ciphertext = Buffer.from(ciphertext, "base64");
+	ephemPublicKey = Buffer.from(ephemPublicKey, "base64");
+	iv = Buffer.from(iv, "base64");
+	mac = Buffer.from(mac, "base64");
+
+	const decrypted = await eccrypto.decrypt(privateKey, {
+		ciphertext,
+		ephemPublicKey,
+		iv,
+		mac
+	});
+	return decode(decrypted.toString("utf8"));
 }

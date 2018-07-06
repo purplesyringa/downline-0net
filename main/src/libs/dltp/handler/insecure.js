@@ -45,9 +45,9 @@ export default class DLTPInsecureHandler {
 
 	log(...args) {
 		if(this.connectionId === null) {
-			console.log("[dltp]", "[handler]", ...args);
+			console.log("[dltp]", "[insecure]", ...args);
 		} else {
-			console.log("[dltp]", `[handler ${this.connectionId}]`, ...args);
+			console.log("[dltp]", `[insecure ${this.connectionId}]`, ...args);
 		}
 	}
 };

@@ -1,7 +1,5 @@
 import {zeroPage} from "../../zero";
 import {safeSend, decode, encode} from "../util";
-import crypto from "crypto";
-import eccrypto from "eccrypto";
 
 class DLTPInsecureConnection {
 	constructor(hash, ip, id, handler) {

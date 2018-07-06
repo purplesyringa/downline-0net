@@ -1,12 +1,11 @@
 import {zeroPage} from "../../zero";
-import {encode, decode} from "./util";
+import DLTPInsecureHandler from "./handler/insecure";
 
 export default class Connection {
 	constructor(bcAddress, ip) {
 		this.bcAddress = bcAddress;
 		this.ip = ip;
-		this.opened = false;
-		this.connectionId = null;
+		this.handler = null;
 	}
 
 	async open() {
@@ -21,40 +20,25 @@ export default class Connection {
 
 		if(features.indexOf("securev1") > -1) {
 			this.log("Trying to connect via 'securev1'...");
-			await this._openSecureV1();
+			throw new Error("Not implemented");
 		} else if(features.indexOf("insecure") > -1) {
 			this.log("Trying to connect via 'insecure'...");
-			await this._openInsecure();
+			this.handler = new DLTPInsecureHandler(this.bcAddress, this.ip);
+			await this.handler.open();
 		} else {
 			this.log("Neither 'securev1' nor 'insecure' are supported.");
 			throw new Error("No supported protocols");
 		}
 	}
 
-	async _openSecureV1() {
-		throw new Error("Not implemented");
-	}
-	async _openInsecure() {
-		const connectionId = await this._safeSend("dltp:open:insecure");
-		this.connectionId = connectionId;
-
-		this.log("Opened insecure connection");
-		this.opened = true;
-	}
-
 
 	async send(message) {
-		if(!this.opened) {
-			throw new Error("Connection is not opened");
+		if(!this.handler) {
+			throw new Error("No handler: connection is not opened");
 		}
 
-		this.log("Send", message);
-
-		const msg = `dltp:connection:${this.connectionId}:message:${encode(message)}`;
-		const recv = decode(await this._safeSend(msg));
-		return recv;
+		return await this.handler.send(message);
 	}
-
 
 
 
@@ -70,7 +54,6 @@ export default class Connection {
 
 		return reply.message;
 	}
-
 
 	log(...args) {
 		if(this.connectionId === null) {

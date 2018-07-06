@@ -1,4 +1,5 @@
 import {zeroPage} from "../../zero";
+import {encode, decode} from "./util";
 
 export default class Connection {
 	constructor(bcAddress, ip) {
@@ -42,6 +43,20 @@ export default class Connection {
 	}
 
 
+	async send(message) {
+		if(!this.opened) {
+			throw new Error("Connection is not opened");
+		}
+
+		this.log("Send", message);
+
+		const msg = `dltp:connection:${this.connectionId}:message:${encode(message)}`;
+		const recv = decode(await this._safeSend(msg));
+		return recv;
+	}
+
+
+
 
 	async _safeSend(message) {
 		const reply = await zeroPage.cmd("as", [this.bcAddress, "peerSend", {
@@ -58,7 +73,7 @@ export default class Connection {
 
 
 	log(...args) {
-		if(this.connectionId == null) {
+		if(this.connectionId === null) {
 			console.log("[dltp]", "[connection]", ...args);
 		} else {
 			console.log("[dltp]", `[connection ${this.connectionId}]`, ...args);

@@ -46,6 +46,14 @@
 <script type="text/javascript">
 	import "vue-awesome/icons/user";
 
+	import Connection from "../../libs/dltp/connection";
+
+	(async function() {
+		const con = new Connection("17Y5T1bxQTpFJDVNBkL22vGU57ZsmzpDdF", "self");
+		await con.open();
+		console.log(await con.send("internic:list"));
+	})();
+
 	export default {
 		name: "home"
 	};

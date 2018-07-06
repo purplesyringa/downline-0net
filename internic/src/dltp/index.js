@@ -1,9 +1,3 @@
-import DLTPServer from "./server";
-
-const dltp = new DLTPServer();
-
-
-
 /*
 var crypto = require("crypto");
 var eccrypto = require("eccrypto");

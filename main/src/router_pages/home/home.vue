@@ -46,11 +46,10 @@
 <script type="text/javascript">
 	import "vue-awesome/icons/user";
 
-	import Connection from "../../libs/dltp/connection";
+	import {connect} from "../../libs/dltp";
 
 	(async function() {
-		const con = new Connection("17Y5T1bxQTpFJDVNBkL22vGU57ZsmzpDdF", "self");
-		await con.open();
+		const con = await connect("internic");
 		console.log(await con.send("internic:list"));
 	})();
 

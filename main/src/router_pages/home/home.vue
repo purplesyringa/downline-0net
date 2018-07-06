@@ -9,7 +9,7 @@
 		<dl-input name="Login" /><br>
 		<dl-input name="Password" /><dl-submit /><br>
 
-		<dl-button class="register">First time playing? Register</dl-button>
+		<dl-button class="register" @click.native="$router.navigate('register')">First time playing? Register</dl-button>
 
 		<div class="warning">
 			This game will expose your real IP to our servers. If you don't mind, just register a new account and start playing. If you <i>do</i> mind, restart ZeroNet in "Tor Always" mode (using Tor Browser won't help).
@@ -65,13 +65,6 @@
 
 <script type="text/javascript">
 	import "vue-awesome/icons/user";
-
-	import {connect} from "../../libs/dltp";
-
-	(async function() {
-		const con = await connect("internic");
-		console.log(await con.send("internic:list"));
-	})();
 
 	export default {
 		name: "home"

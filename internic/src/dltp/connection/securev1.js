@@ -32,7 +32,6 @@ class DLTPSecureV1Connection {
 			zeroPage.cmd("peerValid", [hash]);
 		} else if(data.startsWith("message:")) {
 			const message = await decrypt(data.replace("message:", ""), this.serverPrivateKey);
-			console.log(message);
 
 			let response;
 			try {

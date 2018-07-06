@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "prepare": "patch-package",
     "watch:main": "cd main && webpack --watch",
-    "watch:internic": "cd internic && webpack --watch"
+    "watch:internic": "cd internic && webpack --watch",
+    "watch:gateway.dl": "cd gateway.dl && webpack --watch"
   },
   "repository": {
     "type": "git",

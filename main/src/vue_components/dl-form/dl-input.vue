@@ -1,5 +1,5 @@
 <template>
-	<input :class="['dl-input', {'big': big}]" :placeholder="name">
+	<input :class="['dl-input', {'big': big}]" :placeholder="name" @input="input" v-model="value">
 </template>
 
 <style lang="sass" scoped>
@@ -32,6 +32,17 @@
 <script type="text/javascript">
 	export default {
 		name: "dl-input",
-		props: ["name", "big"]
+		props: ["name", "big", "value"],
+		data() {
+			return {
+				value: ""
+			};
+		},
+
+		methods: {
+			input() {
+				this.$emit("input", this.value);
+			}
+		}
 	};
 </script>

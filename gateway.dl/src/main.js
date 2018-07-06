@@ -5,7 +5,7 @@ import {zeroFS} from "./dltp/zero";
 
 function ui(path) {
 	if(path === "") {
-		// Root
+		// Register
 		return {
 			type: "inputs",
 			header: "Register",
@@ -16,14 +16,45 @@ function ui(path) {
 			],
 			submit: "Register"
 		};
+	} else if(path === "register/passunmatch") {
+		// Registration error
+		return {
+			type: "inputs",
+			header: "Register",
+			items: [
+				["Login", "ivanq"],
+				["Password", "password123"],
+				["Repeat password", "password123"]
+			],
+			error: "Passwords don't match",
+			submit: "Register"
+		};
 	}
 }
 
-const dltp = new DLTPServer((req, con) => {
+function submit(path, values) {
+	if(path === "") {
+		// Register
+		if(values[1] !== values[2]) {
+			return "register/passunmatch";
+		}
+		console.log(`[register]`, values[0], values[1]);
+	}
+}
+
+
+
+
+
+const dltp = new DLTPServer(async (req, con) => {
 	if(req === "ui") {
 		return ui(con.uiPath || "");
+	} else if(req.startsWith("submit:")) {
+		const values = JSON.parse(req.replace("submit:", ""));
+		con.uiPath = await submit(con.uiPath || "", values);
+		return ui(con.uiPath || "");
 	} else if(req.startsWith("cd:")) {
-		con.uiPath = cd(rcon.uiPath || "", eq.replace("cd:"));
+		con.uiPath = cd(con.uiPath || "", req.replace("cd:"));
 		return ui(con.uiPath || "");
 	}
 

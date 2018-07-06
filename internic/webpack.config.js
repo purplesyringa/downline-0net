@@ -94,8 +94,8 @@ module.exports = {
 		]),
 		new CopyWebpackPlugin([
 			{
-				from: "./data",
-				to: "./data"
+				from: "./data/__private__",
+				to: `./data/${require("../private.json").interNICprivate}`
 			}
 		])
 	]

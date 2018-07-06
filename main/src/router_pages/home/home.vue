@@ -7,7 +7,9 @@
 		</div>
 
 		<dl-input name="Login" /><br>
-		<dl-input name="Password" /><dl-submit />
+		<dl-input name="Password" /><dl-submit /><br>
+
+		<dl-button class="register">First time playing? Register</dl-button>
 
 		<div class="warning">
 			This game will expose your real IP to our servers. If you don't mind, just register a new account and start playing. If you <i>do</i> mind, restart ZeroNet in "Tor Always" mode (using Tor Browser won't help).
@@ -45,6 +47,10 @@
 	.user-icon
 		width: 128px
 		height: 128px
+
+	.register
+		display: block !important
+		margin: 16px auto 0
 
 
 	.warning

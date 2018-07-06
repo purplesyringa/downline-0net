@@ -10,6 +10,8 @@ Vue.component("icon", Icon);
 
 import DLInput from "./vue_components/dl-form/dl-input.vue";
 Vue.component("dl-input", DLInput);
+import DLButton from "./vue_components/dl-form/dl-button.vue";
+Vue.component("dl-button", DLButton);
 import DLSubmit from "./vue_components/dl-form/dl-submit.vue";
 Vue.component("dl-submit", DLSubmit);
 

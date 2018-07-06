@@ -1,5 +1,5 @@
 import DLTPServer from "./dltp/server";
-import {zeroFS} from "./zero";
+import {zeroFS} from "./dltp/zero";
 
 let cache = null;
 

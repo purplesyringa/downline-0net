@@ -1,4 +1,4 @@
-import {zeroPage} from "../../zero";
+import {zeroPage} from "../zero";
 import {safeSend, decode, encode} from "../util";
 
 class DLTPInsecureConnection {

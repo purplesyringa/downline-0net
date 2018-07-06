@@ -1,4 +1,4 @@
-import {zeroPage} from "../../zero";
+import {zeroPage} from "../zero";
 import {safeSend, decode, encode, encrypt, decrypt} from "../util";
 import crypto from "crypto";
 import eccrypto from "eccrypto";

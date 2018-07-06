@@ -1,4 +1,4 @@
-import {zeroPage} from "../zero";
+import {zeroPage} from "./zero";
 import eccrypto from "eccrypto";
 
 export async function safeSend(message, ip, to) {

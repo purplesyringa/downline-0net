@@ -1,4 +1,4 @@
-import {zeroPage} from "../zero";
+import {zeroPage} from "./zero";
 import DLTPInsecureConnection from "./connection/insecure";
 import DLTPSecureV1Connection from "./connection/securev1";
 import {safeSend} from "./util";

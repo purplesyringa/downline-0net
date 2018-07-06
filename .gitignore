@@ -3,3 +3,4 @@ data.txt
 */data/users/*/*
 node_modules/
 main/dist/
+internic/dist/

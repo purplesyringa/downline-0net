@@ -6,8 +6,8 @@
 			<icon name="user" class="user-icon" />
 		</div>
 
-		<dl-input name="Login" /><br>
-		<dl-input name="Password" /><dl-submit /><br>
+		<dl-input :big="true" name="Login" /><br>
+		<dl-input :big="true" name="Password" /><dl-submit /><br>
 
 		<dl-button class="register" @click.native="$router.navigate('register')">First time playing? Register</dl-button>
 

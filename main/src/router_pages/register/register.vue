@@ -1,22 +1,20 @@
 <template>
-	<div class="root" ref="register"></div>
+	<remote class="root" host="gateway.dl" />
 </template>
 
 <style lang="sass" scoped>
 	.root
 		position: absolute
-		left: 32px
-		top: 32px
+		left: 50%
+		top: 50%
+		transform: translate(-50%, -50%)
+
+		display: block
+		width: 512px
 </style>
 
 <script type="text/javascript">
-	import {connect} from "../../libs/dltp";
-
 	export default {
-		name: "register",
-		async mounted() {
-			const con = await connect("gateway.dl");
-			console.log(con);
-		}
+		name: "register"
 	};
 </script>

@@ -15,6 +15,9 @@ Vue.component("dl-button", DLButton);
 import DLSubmit from "./vue_components/dl-form/dl-submit.vue";
 Vue.component("dl-submit", DLSubmit);
 
+import Remote from "./vue_components/remote/remote.vue";
+Vue.component("remote", Remote);
+
 Vue.prototype.$eventBus = new Vue();
 
 import root from "./vue_components/root.vue";

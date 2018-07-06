@@ -35,7 +35,7 @@ class DLTPSecureV1Connection {
 
 			let response;
 			try {
-				response = await this.handler(message);
+				response = await this.handler(message, this);
 				zeroPage.cmd("peerValid", [hash]);
 
 				await safeSend(await encrypt(response, this.clientPublicKey), this.ip, hash);

@@ -20,7 +20,7 @@ class DLTPInsecureConnection {
 			const message = decode(data.replace("message:", ""));
 			let response;
 			try {
-				response = await this.handler(message);
+				response = await this.handler(message, this);
 				zeroPage.cmd("peerValid", [hash]);
 				await safeSend(encode(response), this.ip, hash);
 			} catch(e) {

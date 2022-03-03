@@ -9,7 +9,7 @@
 			<h1>{{ui.header}}</h1>
 
 			<div v-for="[name, placeholder], i in ui.items">
-				<div class="input-name">{{name}}</div><dl-input :name="placeholder" v-model="ui.itemValues[i]" />
+				<div class="input-name">{{name}}</div><dl-input :name="placeholder" v-model="itemValues[i]" />
 			</div>
 
 			<div class="desc" v-if="ui.desc">
@@ -57,10 +57,12 @@
 				con: null,
 				connecting: true,
 				loading: true,
+				curPath: null,
+				curHash: null,
+				itemValues: [],
 				ui: {
 					type: "",
 					items: [],
-					itemValues: [],
 					submit: null
 				}
 			};
@@ -68,24 +70,30 @@
 
 		async mounted() {
 			this.con = await connect(this.host);
-			const ui = await this.con.send("ui");
-
 			this.connecting = false;
-			this.loading = false;
-			this.render(ui);
+			await this.send("ui");
 		},
 
 		methods: {
-			render(ui) {
-				this.ui = ui;
-				if(ui.type === "inputs") {
-					ui.itemValues = ui.items.map(() => "");
+			render(ui, path, hash) {
+				if(this.curPath !== path) {
+					if(ui.type === "inputs") {
+						this.itemValues = ui.items.map(() => "");
+					}
 				}
+
+				this.curPath = path;
+				this.curHash = hash;
+				this.ui = ui;
 			},
 
 			async submit() {
+				this.send(`submit:${JSON.stringify(this.itemValues)}`);
+			},
+
+			async send(url) {
 				this.loading = true;
-				this.render(await this.con.send(`submit:${JSON.stringify(this.ui.itemValues)}`));
+				this.render(...(await this.con.send(url)));
 				this.loading = false;
 			}
 		}

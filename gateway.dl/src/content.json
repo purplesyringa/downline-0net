@@ -7,12 +7,6 @@
  "description": "Gateway.DL - Downline",
  "files": {},
  "ignore": "data/.*|merged-.*",
- "includes": {
-  "data/users/content.json": {
-   "signers": [],
-   "signers_required": 1
-  }
- },
  "inner_path": "content.json",
  "modified": 1516199309,
  "postmessage_nonce_security": true,
